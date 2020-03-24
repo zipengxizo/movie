@@ -39,7 +39,8 @@ export default {
   },
   activated() {
     this.isLoading = true;
-    this.axios.get("/api/movieComingList?cityId=10").then(res => {
+    var cityId = 10;
+    this.$api.movie.movieComingList({cityId:cityId}).then(res => {
       var msg = res.data.msg;
       if (msg === "ok") {
         this.comingList = res.data.data.comingList;

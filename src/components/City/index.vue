@@ -40,24 +40,23 @@ export default {
         }
     },
     mounted(){
-        
-        this.axios.get('/api/cityList').then((res)=>{
-                var msg = res.data.msg;
-                if(msg === 'ok'){
-                    this.isLoading = false;
-                    var cities = res.data.data.cities;
-                    //[ { index : 'A' , list : [{ nm : '阿城' , id : 123 }] } ]
-                    var { cityList , hotList } = this.formatCityList(cities);
-                    this.cityList = cityList;
-                    this.hotList = hotList;
-                   // window.localStorage.setItem('cityList' , JSON.stringify(cityList));
-                    //window.localStorage.setItem('hotList' , JSON.stringify(hotList));
-                }
-            });
-
+        this.$api.city.cityList().then((res) => {
+            var msg = res.data.msg;
+            if(msg === 'ok'){
+                this.isLoading = false;
+                var cities = res.data.data.cities;
+                //[ { index : 'A' , list : [{ nm : '阿城' , id : 123 }] } ]
+                var { cityList , hotList } = this.formatCityList(cities);
+                this.cityList = cityList;
+                this.hotList = hotList;
+                // window.localStorage.setItem('cityList' , JSON.stringify(cityList));
+                //window.localStorage.setItem('hotList' , JSON.stringify(hotList));
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
     },
     methods:{
-
         formatCityList(cities){
             var cityList = [];
             var hotList = [];

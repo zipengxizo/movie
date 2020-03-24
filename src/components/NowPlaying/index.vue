@@ -38,7 +38,8 @@ export default {
     };
   },
   activated() {
-    this.axios.get("/api/movieOnInfoList?cityId=10").then(res => {
+    var cityId = 10;
+    this.$api.movie.movieOnList({cityId:cityId}).then(res => {
       var msg = res.data.msg;
       if (msg === "ok") {
         this.movieList = res.data.data.movieList;
@@ -46,7 +47,7 @@ export default {
       }
     });
   },
-  methods: {
+methods: {
     handleToScroll(pos) {
       if (pos.y > 30) {
         this.pullDownMsg = "正在更新....";
@@ -54,7 +55,8 @@ export default {
     },
     handleToTouchEnd(pos) {
       if (pos.y > 30) {
-        this.axios.get("/api/movieOnInfoList?cityId=10").then(res => {
+        var cityId = 10;
+        this.$api.movie.movieComingList({cityId:cityId}).then(res => {
           var msg = res.data.msg;
           if (msg === "ok") {
             this.pullDownMsg = "更新成功";

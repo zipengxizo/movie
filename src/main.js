@@ -10,8 +10,8 @@ Vue.config.productionTip = false;
 import Scroller from '@/components/Scroller'
 Vue.component('Scroller',Scroller);
 
-import axios from 'axios'
-Vue.prototype.axios = axios;
+import api from '@/api';
+Vue.prototype.$api = api;
 
 Vue.filter('replaceWh',(url,arg)=>{
   return url.replace(/w\.h/,arg);

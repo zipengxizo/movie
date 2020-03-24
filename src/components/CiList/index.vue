@@ -49,14 +49,16 @@ export default {
         // var cityId = this.$store.state.city.id;
         // if( this.prevCityId === cityId ){ return; }
         // this.isLoading = true;
-
-        this.axios.get('/api/cinemaList?cityId='+10).then((res)=>{
+        var cityId = 10;
+        this.$api.cinema.cinemaList({cityId:cityId}).then((res) => {
             var msg = res.data.msg;
             if(msg === 'ok'){
                 this.cinemaList = res.data.data.cinemas;
                 this.isLoading = false;
                 //this.prevCityId = cityId
             }
+        }).catch((err) => {
+            console.log(err);
         });
     },
     filters : {
