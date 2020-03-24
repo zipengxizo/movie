@@ -1,4 +1,4 @@
-# hello-world
+# movie
 
 ## Project setup
 ```

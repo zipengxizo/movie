@@ -9,11 +9,11 @@ import BetterScroll from 'better-scroll'
 export default {
     name:'Scroller',
     props:{
-        handleToScroller:{
+        handleToScroll:{
             type:Function,
             default:function(){}
         },
-        handleTouchEnd:{
+        handleToTouchEnd:{
             type:Function,
             default:function(){}
         }
@@ -26,10 +26,10 @@ export default {
         
 
         scroller.on('scroll',(pos)=>{
-            this.handleToScroller(pos);
+            this.handleToScroll(pos);
         });
         scroller.on('touchEnd',(pos)=>{
-            this.handleTouchEnd(pos);
+            this.handleToTouchEnd(pos);
         });
     },
     methods:{
