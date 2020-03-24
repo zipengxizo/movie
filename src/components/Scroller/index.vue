@@ -26,10 +26,12 @@ export default {
         
 
         scroller.on('scroll',(pos)=>{
-            this.handleToScroll(pos);
+            this.$emit('handleToScroll',pos)
+            //this.handleToScroll(pos);
         });
         scroller.on('touchEnd',(pos)=>{
-            this.handleToTouchEnd(pos);
+            this.$emit('handleToTouchEnd',pos);
+            // this.handleToTouchEnd(pos);
         });
     },
     methods:{
