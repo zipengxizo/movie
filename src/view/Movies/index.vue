@@ -5,7 +5,7 @@
                 <div class="movie_menu">
 
                     <router-link tag="div" to="/movie/city" class="city_name">
-                        <span>北京</span><i class="iconfont icon-lower-triangle"></i>
+                        <span>{{$store.state.city.cityName}}</span><i class="iconfont icon-lower-triangle"></i>
                     </router-link>
                     <div class="hot_swtich">
                         <router-link tag="div" to="/movie/nowPlaying" class="hot_item">正在上映</router-link>
@@ -29,16 +29,39 @@
 
 import Header from '@/components/Header';
 import TabBar from '@/components/TabBar';
+import {messageBox} from '@/components/JS/Alert';
+
 export default {
   name:'movie',
-  data(){
-    return {
-
-    }
-  },
   components:{
     Header,
     TabBar
+  },
+  mounted() {
+      console.log(messageBox);
+    setTimeout(()=>{
+        this.$api.location.location().then((res) => {
+            var msg = res.data.msg;
+            if(msg === 'ok'){
+                var nm = res.data.data.nm;
+                var id = res.data.data.id;
+                if( this.$store.state.city.cityId == id ){return;}
+                messageBox({
+                    title : '定位',
+                    content : nm,
+                    cancel : '取消',
+                    ok : '切换定位',
+                    handleOk(){
+                        window.localStorage.setItem('nowNm',nm);
+                        window.localStorage.setItem('nowId',id);
+                        window.location.reload();
+                    }
+                });
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+    },3000);
   }
 
 }

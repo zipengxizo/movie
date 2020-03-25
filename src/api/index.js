@@ -9,6 +9,8 @@ import movie from '@/api/movie';
 import city from '@/api/city';
 //搜索模块接口
 import search from '@/api/search';
+//城市定位接口
+import location from '@/api/location';
 
 
 // 导出接口
@@ -16,5 +18,6 @@ export default {
     cinema,
     movie,
     city,
-    search
+    search,
+    location
 }

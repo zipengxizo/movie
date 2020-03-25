@@ -49,8 +49,8 @@ export default {
                 var { cityList , hotList } = this.formatCityList(cities);
                 this.cityList = cityList;
                 this.hotList = hotList;
-                // window.localStorage.setItem('cityList' , JSON.stringify(cityList));
-                //window.localStorage.setItem('hotList' , JSON.stringify(hotList));
+                window.localStorage.setItem('cityList' , JSON.stringify(cityList));
+                window.localStorage.setItem('hotList' , JSON.stringify(hotList));
             }
         }).catch((err) => {
             console.log(err);
@@ -61,7 +61,7 @@ export default {
             var cityList = [];
             var hotList = [];
 
-            for(var m=0;i<cities.length;m++){
+            for(var m=0;m<cities.length;m++){
                 if(cities[m].isHot === 1){
                     hotList.push( cities[m] );
                 }
@@ -116,10 +116,10 @@ export default {
             //this.$refs.city_List.scrollToTop (-h2[index].offsetTop);
 
         },
-        handleToCity(){
-           // this.$store.commit('city/CITY_INFO',{ nm , id });
-           // window.localStorage.setItem('nowNm',nm);
-            //window.localStorage.setItem('nowId',id);
+        handleToCity(cityName,cityId){
+            this.$store.commit('city/CITY_INFO',{ cityName , cityId });
+            window.localStorage.setItem('nowNm',cityName);
+            window.localStorage.setItem('nowId',cityId);
             this.$router.push('/movie/nowPlaying');
 
         }

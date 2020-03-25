@@ -34,16 +34,20 @@ export default {
     return {
       isLoading: true,
       movieList: [],
-      pullDownMsg: ""
+      pullDownMsg: "",
+      prevCityId : -1
     };
   },
   activated() {
-    var cityId = 10;
+    var cityId = this.$store.state.city.cityId;
+    if(this.prevCityId == cityId) return;
+    this.isLoading = false;
     this.$api.movie.movieOnList({cityId:cityId}).then(res => {
       var msg = res.data.msg;
       if (msg === "ok") {
         this.movieList = res.data.data.movieList;
         this.isLoading = false;
+        this.prevCityId = cityId;
       }
     });
   },

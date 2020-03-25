@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import router from './router/index'
 import App from './App.vue'
+import store from './store';
 
 
 import Loading from '@/components/Loading'
@@ -19,5 +20,6 @@ Vue.filter('replaceWh',(url,arg)=>{
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
