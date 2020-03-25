@@ -1,6 +1,6 @@
 <template>
     <div id="main">
-        <Header title="电影" />
+        <Header title="影院" />
         <div id="content">
             <div class="cinema_menu">
 				<div class="city_switch">
@@ -13,7 +13,7 @@
 					特色 <i class="iconfont icon-lower-triangle"></i>
 				</div>
 			</div>
-            <CiList />
+            <CinemaList />
         </div>
         <TabBar />
     </div>
@@ -22,14 +22,14 @@
 <script>
 import Header from '@/components/Header';
 import TabBar from '@/components/TabBar';
-import CiList from '@/components/CiList';
+import CinemaList from '@/components/CinemaList';
 
 export default {
     name : 'cinema',
     components : {
         Header,
         TabBar,
-        CiList
+        CinemaList
     }
 }
 </script>

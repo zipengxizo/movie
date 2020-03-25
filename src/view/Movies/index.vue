@@ -1,6 +1,6 @@
 <template>
       <div id="main">
-        <Header title="Test电影" />
+        <Header title="电影" />
             <div id="content">
                 <div class="movie_menu">
 
@@ -21,7 +21,7 @@
                 </keep-alive>
             </div>
         <TabBar />
-        <!-- <router-view name="detail" /> -->
+        <router-view name="detail" />
     </div>
 </template>
 

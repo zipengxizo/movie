@@ -21,6 +21,16 @@ export default {
             component:()=>import('@/components/Search')
         },
         {
+            path : 'detail/:movieId',
+            components : {
+                default : ()=> import('@/components/NowPlaying'),
+                detail : ()=> import('@/view/Movies/detail')
+            },
+            props : {
+                detail : true
+            }
+        },
+        {
             path : '/movie',
             redirect : '/movie/nowPlaying'
         }

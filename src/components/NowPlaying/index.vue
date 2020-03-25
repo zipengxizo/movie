@@ -48,6 +48,9 @@ export default {
     });
   },
 methods: {
+    handleToDetail(movieId) {
+      this.$router.push('/movie/detail/'+movieId);
+    },
     handleToScroll(pos) {
       if (pos.y > 30) {
         this.pullDownMsg = "正在更新....";

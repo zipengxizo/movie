@@ -7,8 +7,12 @@ import axios from '@/utils/http';
 
 const cinema = {    
     // 影院列表    
-    cinemaList () {        
-        return axios.get(`${base.api1}/cinemaList`);    
+    cinemaList (arg) {        
+        return axios.get(`${base.api1}/cinemaList`,{
+            params : {
+                cityId : arg.cityId
+            }
+        });    
     }
 }
 
