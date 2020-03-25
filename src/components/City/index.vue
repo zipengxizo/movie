@@ -112,8 +112,9 @@ export default {
             
         handleToIndex(index){
             var h2 = this.$refs.city_sort.getElementsByTagName('h2');
-            this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop;
-            //this.$refs.city_List.scrollToTop (-h2[index].offsetTop);
+            this.$refs.city_sort.parentNode.style.transform = 'translateY(' + -h2[index].offsetTop + 'px)'; 
+            // this.$refs.city_sort.parentNode.scrollTop = -h2[index].offsetTop;
+            // this.$refs.city_List.scrollToTop(-h2[index].offsetTop);
 
         },
         handleToCity(cityName,cityId){

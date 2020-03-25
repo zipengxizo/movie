@@ -41,7 +41,7 @@ export default {
   activated() {
     var cityId = this.$store.state.city.cityId;
     if(this.prevCityId == cityId) return;
-    this.isLoading = false;
+    this.isLoading = true;
     this.$api.movie.movieOnList({cityId:cityId}).then(res => {
       var msg = res.data.msg;
       if (msg === "ok") {
@@ -52,7 +52,7 @@ export default {
     }).catch((err)=>{
       console.log(err);
       this.isLoading = false;
-    })
+    });
   },
 methods: {
     handleToDetail(movieId) {
@@ -78,6 +78,7 @@ methods: {
         }).catch((err)=>{
           console.log(err);
           this.isLoading = false;
+          this.pullDownMsg = '';
         })
       }
     }
