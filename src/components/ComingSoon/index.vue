@@ -48,6 +48,9 @@ export default {
         this.isLoading = false;
         this.prevCityId = cityId;
       }
+    }).catch((err)=>{
+      console.log(err);
+      this.isLoading = false;
     });
   },
   methods: {
@@ -61,7 +64,7 @@ export default {
     },
     handleToTouchEnd(pos) {
       if (pos.y > 30) {
-        this.axios.get("/api/movieOnInfoList?cityId=10").then(res => {
+          this.$api.movie.movieComingList({cityId:this.$store.state.city.cityId}).then((res) => {
           var msg = res.data.msg;
           if (msg === "ok") {
             this.pullDownMsg = "更新成功";
@@ -70,6 +73,9 @@ export default {
               this.pullDownMsg = "";
             }, 1000);
           }
+        }).catch((err) => {
+          console.log(err);
+          this.isLoading = false;
         });
       }
     }

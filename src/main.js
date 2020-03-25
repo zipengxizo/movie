@@ -4,6 +4,13 @@ import App from './App.vue'
 import store from './store';
 
 
+import { Toast } from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Toast);
+
+import {alert} from '@/components/JS/Alert';
+Vue.prototype.$alert = alert;
+
 import Loading from '@/components/Loading'
 Vue.component('Loading',Loading);
 Vue.config.productionTip = false;

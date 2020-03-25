@@ -32,19 +32,19 @@ export default {
         };
     },
     activated(){
-        // var cityId = this.$store.state.city.id;
-        // if( this.prevCityId === cityId ){ return; }
-        // this.isLoading = true;
-        var cityId = 10;
+        var cityId = this.$store.state.city.id;
+        if( this.prevCityId === cityId ){ return; }
+        this.isLoading = true;
         this.$api.cinema.cinemaList({cityId:cityId}).then((res) => {
             var msg = res.data.msg;
             if(msg === 'ok'){
                 this.cinemaList = res.data.data.cinemas;
                 this.isLoading = false;
-                //this.prevCityId = cityId
+                this.prevCityId = cityId
             }
         }).catch((err) => {
             console.log(err);
+            this.isLoading = false;
         });
     },
     filters : {

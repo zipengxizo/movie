@@ -6,7 +6,6 @@
  * 请求拦截、响应拦截、错误统一处理
  */
 import axios from 'axios';
-// import store from '../store/index';
 import router from '../router';
 import store from '../store/index';
 import { Toast } from 'vant';
@@ -19,7 +18,7 @@ import { Toast } from 'vant';
 const tip = msg => {    
     Toast({        
         message: msg,        
-        duration: 1000,        
+        duration: 3000,        
         forbidClick: true    
     });
 }
@@ -65,10 +64,11 @@ const errorHandle = (status, other) => {
             break;
         default:
             console.log(other);   
+            tip('网络断开,稍后请重试');
         }}
 
 // 创建axios实例
-var instance = axios.create({    timeout: 1000 * 12});
+var instance = axios.create({timeout: 1000 * 3});
 // 设置post请求头
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 /** 
@@ -105,9 +105,9 @@ instance.interceptors.response.use(
             // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
             if (!window.navigator.onLine) {
             //    store.commit('changeNetwork', false);
-            } else {
-                return Promise.reject(error);
             }
+            tip('网络异常');
+            return Promise.reject(error);
         }
     });
 

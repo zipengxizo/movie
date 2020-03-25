@@ -49,7 +49,10 @@ export default {
         this.isLoading = false;
         this.prevCityId = cityId;
       }
-    });
+    }).catch((err)=>{
+      console.log(err);
+      this.isLoading = false;
+    })
   },
 methods: {
     handleToDetail(movieId) {
@@ -62,8 +65,8 @@ methods: {
     },
     handleToTouchEnd(pos) {
       if (pos.y > 30) {
-        var cityId = 10;
-        this.$api.movie.movieComingList({cityId:cityId}).then(res => {
+        var cityId = this.$store.state.city.cityId;
+        this.$api.movie.movieOnList({cityId:cityId}).then(res => {
           var msg = res.data.msg;
           if (msg === "ok") {
             this.pullDownMsg = "更新成功";
@@ -72,7 +75,10 @@ methods: {
                 this.pullDownMsg = "";
             }, 1000);
           }
-        });
+        }).catch((err)=>{
+          console.log(err);
+          this.isLoading = false;
+        })
       }
     }
   }
