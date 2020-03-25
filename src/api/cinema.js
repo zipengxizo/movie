@@ -9,8 +9,7 @@ const cinema = {
     // 影院列表    
     cinemaList () {        
         return axios.get(`${base.api1}/cinemaList`);    
-    },
-    // 其他接口…………
+    }
 }
 
 export default cinema;

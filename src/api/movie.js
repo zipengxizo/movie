@@ -7,21 +7,27 @@ import axios from '@/utils/http';
 
 const movie = {    
     // 正在热映    
-    movieOnList (cityId) {        
+    movieOnList (arg) { 
         return axios.get(`${base.api1}/movieOnInfoList`,{
-            cityId : cityId
+            params :{
+                cityId : arg.cityId
+            }
         });    
     },    
     // 即将上映    
-    movieComingList (cityId) {
+    movieComingList (arg) {
         return axios.get(`${base.api1}/movieComingList`,{
-            cityId : cityId
+            params :{
+                cityId:arg.cityId
+            }
         });    
     },        
     // 电影详情 
-    movieDetail (movieId) {        
-        return axios.get(`${base.api1}/detailmovie`, {            
-            movieId: movieId        
+    movieDetail (arg) {        
+        return axios.get(`${base.api1}/detailmovie`, { 
+            params : {
+                movieId : arg.movieId
+            }           
         });    
     },
 }

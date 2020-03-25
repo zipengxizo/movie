@@ -11,10 +11,9 @@
                         <router-link tag="div" to="/movie/nowPlaying" class="hot_item">正在上映</router-link>
                         <router-link tag="div" to="/movie/comingSoon" class="hot_item">即将上映</router-link>
                     </div>
-                    <div class="search_entry"><i class="iconfont icon-sousuo"></i></div>
-                    <!-- <router-link tag="div" to="/movie/search" class="search_entry">
+                    <router-link tag="div" to="/movie/search" class="search_entry">
                         <i class="iconfont icon-sousuo"></i>
-                    </router-link> -->
+                    </router-link>
                     
                 </div>
                 <keep-alive>

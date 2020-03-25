@@ -7,11 +7,14 @@ import cinema from '@/api/cinema';
 import movie from '@/api/movie';
 //城市模块接口
 import city from '@/api/city';
+//搜索模块接口
+import search from '@/api/search';
 
 
 // 导出接口
 export default {    
     cinema,
     movie,
-    city
+    city,
+    search
 }
