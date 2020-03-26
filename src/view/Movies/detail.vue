@@ -62,22 +62,19 @@ export default {
         }
     },
     mounted(){
-        //console.log( this.movieId );
         this.$api.movie.movieDetail({movieId:this.movieId}).then((res) => {
             var msg = res.data.msg;
             if( msg === 'ok' ){
                 this.isLoading = false;
                 this.detailMovie = res.data.data.detailMovie;
                 this.$nextTick(()=>{
-                    new Swiper(this.$refs.detail_player , {
+                    new window.Swiper(this.$refs.detail_player , {
                         slidesPerView : 'auto',
                         freeMode : true,
                         freeModeSticky: true
                     });
                 });
             }
-
-            
         }).catch((err) => {
             console.log(err);
         });

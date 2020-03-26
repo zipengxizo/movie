@@ -1,6 +1,6 @@
 <template>
     <div id="main">
-        <Header title="个人中心" />
+        <Header title="我的中心" />
         <div id="content">
             <router-view />
         </div>
@@ -11,14 +11,12 @@
 <script>
 import Header from '@/components/Header';
 import TabBar from '@/components/TabBar';
-// import Login from '@/components/Login';
 
 export default {
-    name : 'mine',
+    name : 'Mine',
     components : {
         Header,
-        TabBar,
-        // Login
+        TabBar
     }
 }
 </script>

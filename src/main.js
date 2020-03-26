@@ -8,6 +8,9 @@ import { Toast } from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Toast);
 
+import axios from 'axios';
+Vue.prototype.axios = axios;
+
 import {alert} from '@/components/JS/Alert';
 Vue.prototype.$alert = alert;
 
@@ -23,7 +26,11 @@ Vue.prototype.$api = api;
 
 Vue.filter('replaceWh',(url,arg)=>{
   return url.replace(/w\.h/,arg);
-})
+});
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
 
 new Vue({
   router,
