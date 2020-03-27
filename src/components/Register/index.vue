@@ -45,7 +45,7 @@ export default {
             
             if(this.disabled){ return; }
 
-            this.axios.get('/api2/users/verify?email=' + this.email ).then((res)=>{
+            this.$api.users.verify({email : this.email}).then((res)=>{
                 var status = res.data.status;
                 var This = this;
                 if( status === 0 ){
@@ -68,7 +68,7 @@ export default {
             });
         },
         handleToRegister(){
-            this.axios.post('/api2/users/register',{
+            this.$api.users.register({
                 email : this.email,
                 username : this.username,
                 password : this.password,

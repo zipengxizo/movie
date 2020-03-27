@@ -8,9 +8,6 @@ import { Toast } from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Toast);
 
-import axios from 'axios';
-Vue.prototype.axios = axios;
-
 import {alert} from '@/components/JS/Alert';
 Vue.prototype.$alert = alert;
 

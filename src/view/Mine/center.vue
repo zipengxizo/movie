@@ -1,10 +1,8 @@
 <template>
-    <div>
-        <div>个人中心：</div>
-        <div>当前用户：{{ $store.state.user.name }} <a href="javascript:;" @touchstart="handleToLogout">退出</a></div>
-        <!-- v-if="$store.state.user.isAdmin" -->
-        <div >用户身份：管理员 <a href="/admin" target="_blank">进入管理后台</a></div>
-        <!-- <div v-else>用户身份：普通会员</div> -->
+    <div style="padding:10px;">
+        <div>当前用户：{{ $store.state.user.name }} <a href="javascript:void(0);" @click="handleToLogout">退出</a></div>
+        <div v-if="$store.state.user.isAdmin">用户身份：管理员 <a href="/admin" target="_blank">进入管理后台</a></div>
+        <div v-else>用户身份：普通会员</div>
         <div>
             <input type="file" name="file" value="上传头像" @change="handleToUpload">
             <img class="userHead" :src="$store.state.user.userHead">
@@ -13,14 +11,13 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { messageBox } from '@/components/JS/Alert';
+import axios from 'axios';
 export default {
     name : 'center',
     methods : {
         handleToLogout(){
-            console.log(111)
-            this.axios.get('/api2/users/logout').then((res)=>{
+            this.$api.users.logout().then((res)=>{
                 var status = res.data.status;
                 if(status === 0){
                     localStorage.removeItem('name');
@@ -40,9 +37,9 @@ export default {
                 }
             };
 
-            this.axios.post('/api2/users/uploadUserHead',param , config).then((res)=>{
+            var This = this;
+            this.$api.users.uploadUserHead(param , config).then((res)=>{
                 var status = res.data.status;
-                var This = this;
                 if( status === 0 ){
                     messageBox({
                         title : '信息',

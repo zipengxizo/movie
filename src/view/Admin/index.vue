@@ -1,6 +1,9 @@
 <template>
     <el-container>
-        <el-header>喵喵网管理后台 ，欢迎：{{ $store.state.user.name }}</el-header>
+        <el-header>
+            电影管理后台 ，欢迎：{{ $store.state.user.name }}
+            <div style="float:right;font-size:normal;"><i class="el-icon-user-solid"></i><a href="#" @click="handleLoginOut">退出</a></div>
+        </el-header>
         <el-container>
             <el-aside width="200px">
                 <el-menu default-active="1">
@@ -36,10 +39,22 @@ export default {
                 next();
             }
             else{
-                next();
-               // next('/mine/login');
+               next('/mine/login');
             }
         });
+    },
+    methods:{
+        handleLoginOut() {
+            this.$api.users.logout().then((res)=>{
+                var status = res.data.status;
+                if(status === 0){
+                    localStorage.removeItem('name');
+                    localStorage.removeItem('isAdmin');
+                    this.$store.commit('user/USER_NAME',{ name : '' , isAdmin : false , userHead : '' });
+                    this.$router.push('/mine/login');
+                }
+            });
+        }
     }
 }
 </script>

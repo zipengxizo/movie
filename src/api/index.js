@@ -11,6 +11,8 @@ import city from '@/api/city';
 import search from '@/api/search';
 //城市定位接口
 import location from '@/api/location';
+//admin后台接口
+import users from '@/api/users';
 
 
 // 导出接口
@@ -19,5 +21,6 @@ export default {
     movie,
     city,
     search,
-    location
+    location,
+    users
 }

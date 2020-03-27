@@ -52,7 +52,7 @@ export default {
         }
     },
     mounted(){
-        this.axios.get('/api2/admin/usersList').then((res)=>{
+        this.$api.users.usersList().then((res)=>{
            var status = res.data.status;
            if(status === 0){
                this.tableData = res.data.data.usersList;
@@ -66,7 +66,7 @@ export default {
     },
     methods : {
         handleToFreeze(index,row){
-            this.axios.post('/api2/admin/updateFreeze',{
+            this.$api.users.updateFreeze({
                 email : row.email,
                 isFreeze : !row.isFreeze
             }).then((res)=>{
@@ -87,24 +87,30 @@ export default {
             });
         },
         handleToDelete(index,row){
-            this.axios.post('/api2/admin/deleteUser',{
-                email : row.email
-            }).then((res)=>{
-                var status = res.data.status;
-                if(status === 0){
-                     this.$alert('删除操作已成功', '信息', {
-                        confirmButtonText: '确定',
-                        callback: () => {
-                            this.tableData.splice(index,1);
+            this.$confirm('确认删除?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    this.$api.users.deleteUser({
+                        email : row.email
+                    }).then((res)=>{
+                        var status = res.data.status;
+                        if(status === 0){
+                            this.$alert('删除操作已成功', '信息', {
+                                confirmButtonText: '确定',
+                                callback: () => {
+                                    this.tableData.splice(index,1);
+                                }
+                            });
+                        }
+                        else{
+                            this.$alert('删除操作失败', '信息', {
+                                confirmButtonText: '确定'
+                            });
                         }
                     });
-                }
-                else{
-                     this.$alert('删除操作失败', '信息', {
-                        confirmButtonText: '确定'
-                    });
-                }
-            });
+                });
         }
     }
 }
