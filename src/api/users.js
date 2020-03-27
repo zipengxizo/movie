@@ -37,7 +37,7 @@ const users = {
         
     },
     isAdmin() {
-        return axios.get(`${base.api2}/users/admin`)
+        return axios.get(`${base.api2}/admin`)
     },
     verify(params) {
         return axios.get(`${base.api2}/users/verify`,params)

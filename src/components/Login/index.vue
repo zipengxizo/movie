@@ -7,7 +7,7 @@
             <input v-model="password" class="login_text" type="password" placeHolder="请输入您的密码" >
         </div>
         <div>
-            <input type="text" class="login_text" v-model="verifyImg" placeHolder="请输入您的验证码"> <img @click="handleToVerifyImg" :src="$api.users.verifyImg()">
+            <input type="text" class="login_text" v-model="verifyImg" placeHolder="请输入您的验证码"> <img @click="handleToVerifyImg" :src="$api.users.verifyImg()" ref="img">
         </div>
         <div class="login_btn">
             <input type="submit" value="登录" @click="handleToLogin">
@@ -40,6 +40,10 @@ export default {
             }).then((res)=>{
                 var status = res.data.status;
                 if(status === 0){
+                    //设置token
+                    let token = res.data.data.token;
+                    window.localStorage.setItem('token',token);
+                    This.$store.commit('token/TOKEN',{token});
                     alert({
                         title : '登录',
                         content : '登录成功',
@@ -55,6 +59,7 @@ export default {
                         content : res.data.msg,
                         ok : '确定'
                     });
+                    This.$refs.img.src = this.$api.users.verifyImg() + '?' + Math.random();
                 }
 
             });

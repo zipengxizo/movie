@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import axios from 'axios';
+import minaxios from '@/api/';
 export default {
     name : 'admin',
     beforeRouteEnter (to, from, next) {
-        axios.get('/api2/admin').then((res)=>{
+        minaxios.users.isAdmin().then((res)=>{
             var status = res.data.status;
             if(status === 0){
                 next();
@@ -50,6 +50,8 @@ export default {
                 if(status === 0){
                     localStorage.removeItem('name');
                     localStorage.removeItem('isAdmin');
+                    window.localStorage.removeItem('token');
+                    this.$store.commit('token/TOKEN',{token:''})
                     this.$store.commit('user/USER_NAME',{ name : '' , isAdmin : false , userHead : '' });
                     this.$router.push('/mine/login');
                 }
