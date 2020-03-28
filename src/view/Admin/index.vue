@@ -33,7 +33,7 @@ import minaxios from '@/api/';
 export default {
     name : 'admin',
     beforeRouteEnter (to, from, next) {
-        minaxios.users.isAdmin().then((res)=>{
+        minaxios.users.isAdmin({fullPath:to.fullPath}).then((res)=>{
             var status = res.data.status;
             if(status === 0){
                 next();
@@ -41,6 +41,8 @@ export default {
             else{
                next('/mine/login');
             }
+        }).catch((err)=>{
+            console.log(err);
         });
     },
     methods:{

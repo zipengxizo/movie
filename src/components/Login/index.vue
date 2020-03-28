@@ -33,36 +33,42 @@ export default {
     methods : {
         handleToLogin(){
         var This = this;
-            this.$api.users.login({
-                username : this.username,
-                password : this.password,
-                verifyImg : this.verifyImg
-            }).then((res)=>{
-                var status = res.data.status;
-                if(status === 0){
-                    //设置token
-                    let token = res.data.data.token;
-                    window.localStorage.setItem('token',token);
-                    This.$store.commit('token/TOKEN',{token});
-                    alert({
-                        title : '登录',
-                        content : '登录成功',
-                        ok : '确定',
-                        handleOk(){
+        let fullPath = this.$route.query.redirect;
+        this.$api.users.login({
+            username : this.username,
+            password : this.password,
+            verifyImg : this.verifyImg
+        }).then((res)=>{
+            var status = res.data.status;
+            if(status === 0){
+                //设置token
+                let token = res.data.data.token;
+                window.localStorage.setItem('token',token);
+                This.$store.commit('token/TOKEN',{token});
+                alert({
+                    title : '登录',
+                    content : '登录成功',
+                    ok : '确定',
+                    handleOk(){
+                        if (fullPath) {
+                            This.$router.push(fullPath);
+                        }
+                        else{
                             This.$router.push('/mine/center');
                         }
-                    });
-                }
-                else{
-                     alert({
-                        title : '登录',
-                        content : res.data.msg,
-                        ok : '确定'
-                    });
-                    This.$refs.img.src = this.$api.users.verifyImg() + '?' + Math.random();
-                }
+                    }
+                });
+            }
+            else{
+                    alert({
+                    title : '登录',
+                    content : res.data.msg,
+                    ok : '确定'
+                });
+                This.$refs.img.src = this.$api.users.verifyImg() + '?' + Math.random();
+            }
 
-            });
+        });
         },
         handleToVerifyImg(ev){
             ev.target.src = this.$api.users.verifyImg() +'?' + Math.random();

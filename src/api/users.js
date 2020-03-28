@@ -36,8 +36,8 @@ const users = {
         return axios.get(`${base.api2}/users/logout`)
         
     },
-    isAdmin() {
-        return axios.get(`${base.api2}/admin`)
+    isAdmin(params) {
+        return axios.post(`${base.api2}/admin`,params)
     },
     verify(params) {
         return axios.get(`${base.api2}/users/verify`,params)
