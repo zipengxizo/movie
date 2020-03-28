@@ -24,6 +24,10 @@
             label="用户邮箱">
             </el-table-column>
             <el-table-column
+            prop="isAdmin"
+            label="用户角色">
+            </el-table-column>
+            <el-table-column
             label="操作">
                 <template slot-scope="scope">
                     <el-button size="small" @click="handleToFreeze(scope.$index, scope.row)">{{ scope.row.isFreeze ? '已冻结' : '未冻结' }}</el-button>
@@ -61,7 +65,11 @@ export default {
     },
     computed : {
         nowTableData(){
-            return this.tableData.slice( (this.currentPage - 1)*this.pageSize , this.currentPage*this.pageSize ) || [];
+            let sliceData =  this.tableData.slice( (this.currentPage - 1)*this.pageSize , this.currentPage*this.pageSize ) || [];
+            return sliceData.map((item)=>{
+                item.isAdmin =  item.isAdmin ? '管理员' : '普通用户'
+                return item;
+            })
         }
     },
     methods : {
