@@ -6,7 +6,7 @@ import axios from 'axios';
 import router from '@/router/'
 import store from '@/store/index';
 import { Toast } from 'vant';
-import 'vant/lib/index.css';
+// import 'vant/lib/index.css';
 
 
 /** 
