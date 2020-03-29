@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import messageBox from './messageBox.vue';
+import MessageBox from './messageBox.vue';
 
-export const alert = (function(){
+export const messageBox = (function(){
 
     return function( opts ){  //配置参数
 
@@ -14,7 +14,7 @@ export const alert = (function(){
             handleOk : null
         };
     
-        var MyComponent = Vue.extend(messageBox);
+        var MyComponent = Vue.extend(MessageBox);
 
         for(var attr in opts){
             defaults[attr] = opts[attr];

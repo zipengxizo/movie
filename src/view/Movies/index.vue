@@ -29,6 +29,7 @@
 
 import Header from '@/components/Header';
 import TabBar from '@/components/TabBar';
+import {messageBox} from '@/components/JS/Alert';
 
 export default {
   name:'movie',
@@ -44,7 +45,7 @@ export default {
                 var nm = res.data.data.nm;
                 var id = res.data.data.id;
                 if( this.$store.state.city.cityId == id ){return;}
-                this.$alert({
+                messageBox({
                     title : '定位',
                     content : nm,
                     cancel : '取消',

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {alert} from '@/components/JS/Alert';
+import {messageBox} from '@/components/JS/Alert';
 export default {
     name : 'Login',
     data(){
@@ -45,7 +45,7 @@ export default {
                 let token = res.data.data.token;
                 window.localStorage.setItem('token',token);
                 This.$store.commit('token/TOKEN',{token});
-                alert({
+                messageBox({
                     title : '登录',
                     content : '登录成功',
                     ok : '确定',
@@ -60,7 +60,7 @@ export default {
                 });
             }
             else{
-                    alert({
+                    messageBox({
                     title : '登录',
                     content : res.data.msg,
                     ok : '确定'

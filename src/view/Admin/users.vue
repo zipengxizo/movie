@@ -46,6 +46,7 @@
 </template>
 
 <script>
+// import func from '../../../vue-temp/vue-editor-bridge';
 export default {
     name : 'users',
     data(){
@@ -64,15 +65,34 @@ export default {
         });
     },
     computed : {
-        nowTableData(){
-            let sliceData =  this.tableData.slice( (this.currentPage - 1)*this.pageSize , this.currentPage*this.pageSize ) || [];
-            return sliceData.map((item)=>{
-                item.isAdmin =  item.isAdmin ? '管理员' : '普通用户'
-                return item;
-            })
-        }
+        nowTableData() {
+        let sliceData =  this.tableData.slice( (this.currentPage - 1)*this.pageSize , this.currentPage*this.pageSize ) || [];
+                return sliceData.map((item)=>{
+                    item.date = this.dateFormate('yyyy-MM-dd hh:mm:ss',new Date(item.date));
+                    item.isAdmin =  item.isAdmin ? '管理员' : '普通用户'
+                    return item;
+                })
+            }
     },
     methods : {
+        dateFormate(fmt,date) {
+            var o = { 
+            "M+" : date.getMonth()+1,     //月份 
+            "d+" : date.getDate(),     //日 
+            "h+" : date.getHours(),     //小时 
+            "m+" : date.getMinutes(),     //分 
+            "s+" : date.getSeconds(),     //秒 
+            "q+" : Math.floor((date.getMonth()+3)/3), //季度 
+            "S" : date.getMilliseconds()    //毫秒 
+            }; 
+            if(/(y+)/.test(fmt)) 
+            fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+            for(var k in o) 
+            if(new RegExp("("+ k +")").test(fmt)) 
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length))); 
+            return fmt; 
+     
+        },
         handleToFreeze(index,row){
             this.$api.users.updateFreeze({
                 email : row.email,

@@ -29,11 +29,14 @@
 </template>
 
 <script>
-import minaxios from '@/api/';
+import Vue from 'vue';
+import element from '@/element';
+Vue.use(element)
+import api from '@/api';
 export default {
     name : 'admin',
     beforeRouteEnter (to, from, next) {
-        minaxios.users.isAdmin({fullPath:to.fullPath}).then((res)=>{
+        api.users.isAdmin({fullPath:to.fullPath}).then((res)=>{
             var status = res.data.status;
             if(status === 0){
                 next();

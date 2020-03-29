@@ -27,7 +27,7 @@
 
 <script>
 import { setInterval } from 'timers';
-import {alert} from '@/components/JS/Alert';
+import {messageBox} from '@/components/JS/Alert';
 export default {
     name : 'register',
     data(){
@@ -49,7 +49,7 @@ export default {
                 var status = res.data.status;
                 var This = this;
                 if( status === 0 ){
-                    alert({
+                    messageBox({
                         title : '验证码',
                         content : '验证码已发送',
                         ok : '确定',
@@ -59,7 +59,7 @@ export default {
                     });
                 }
                 else{
-                     alert({
+                     messageBox({
                         title : '验证码',
                         content : '验证码发送失败',
                         ok : '确定'
@@ -77,7 +77,7 @@ export default {
                 var status = res.data.status;
                 var This = this;
                 if(status === 0){
-                    alert({
+                    messageBox({
                         title : '注册',
                         content : '用户注册成功',
                         ok : '确定',
@@ -87,7 +87,7 @@ export default {
                     });
                 }
                 else{
-                     alert({
+                     messageBox({
                         title : '注册',
                         content : res.data.msg + ', 请重新注册',
                         ok : '确定'

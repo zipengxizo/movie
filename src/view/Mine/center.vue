@@ -12,7 +12,7 @@
 
 <script>
 import { messageBox } from '@/components/JS/Alert';
-import axios from 'axios';
+import api from '@/api';
 export default {
     name : 'center',
     methods : {
@@ -66,7 +66,7 @@ export default {
         }
     },
     beforeRouteEnter (to, from, next) {
-        axios.get('/api2/users/getUser').then((res)=>{
+        api.users.getUser().then((res)=>{
             var status = res.data.status;
             if(status === 0){
                 next(vm => {
@@ -82,6 +82,8 @@ export default {
             else{
                 next('/mine/login');
             }
+        }).catch((err)=>{
+            console.log(err)
         });
     }
 }

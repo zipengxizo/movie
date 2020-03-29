@@ -2,18 +2,10 @@ import Vue from 'vue'
 import router from './router'
 import App from './App.vue'
 import store from './store';
-
-
-import { Toast } from 'vant';
-import 'vant/lib/index.css';
-Vue.use(Toast);
-
-import {alert} from '@/components/JS/Alert';
-Vue.prototype.$alert = alert;
+Vue.config.productionTip = false;
 
 import Loading from '@/components/Loading'
 Vue.component('Loading',Loading);
-Vue.config.productionTip = false;
 
 import Scroller from '@/components/Scroller'
 Vue.component('Scroller',Scroller);
@@ -24,10 +16,6 @@ Vue.prototype.$api = api;
 Vue.filter('replaceWh',(url,arg)=>{
   return url.replace(/w\.h/,arg);
 });
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUI);
-
 
 new Vue({
   router,

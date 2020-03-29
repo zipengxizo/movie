@@ -1,6 +1,3 @@
-
-
-
 /**
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
@@ -9,6 +6,7 @@ import axios from 'axios';
 import router from '@/router/'
 import store from '@/store/index';
 import { Toast } from 'vant';
+import 'vant/lib/index.css';
 
 
 /** 
@@ -55,9 +53,9 @@ const errorHandle = (status, response) => {
             tip('登录过期，请重新登录');
             window.localStorage.removeItem('token');
             // store.commit('loginSuccess', null);
-            setTimeout(() => {
-                toLogin(response.data.fullPath);
-            }, 1000);
+            // setTimeout(() => {
+            //     toLogin(response.data.fullPath);
+            // }, 1000);
             break;
         // 404请求不存在
         case 404:
