@@ -32,7 +32,7 @@ export default {
     },
     methods : {
         handleToLogin(){
-        var This = this;
+        var self = this;
         let fullPath = this.$route.query.redirect;
         this.$api.users.login({
             username : this.username,
@@ -42,19 +42,20 @@ export default {
             var status = res.data.status;
             if(status === 0){
                 //设置token
-                let token = res.data.data.token;
+                let {token,username} = res.data.data;
                 window.localStorage.setItem('token',token);
-                This.$store.commit('token/TOKEN',{token});
+                window.localStorage.setItem('username',username)
+                self.$store.commit('token/TOKEN',{token});
                 messageBox({
                     title : '登录',
                     content : '登录成功',
                     ok : '确定',
                     handleOk(){
                         if (fullPath) {
-                            This.$router.push(fullPath);
+                            self.$router.push(fullPath);
                         }
                         else{
-                            This.$router.push('/mine/center');
+                            self.$router.push('/mine/center');
                         }
                     }
                 });
@@ -65,7 +66,7 @@ export default {
                     content : res.data.msg,
                     ok : '确定'
                 });
-                This.$refs.img.src = this.$api.users.verifyImg() + '?' + Math.random();
+                self.$refs.img.src = this.$api.users.verifyImg() + '?' + Math.random();
             }
 
         });

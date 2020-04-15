@@ -1,10 +1,11 @@
 module.exports = {
     // productionSourceMap : false,
-
+    publicPath: '/movie',
     devServer : {
         proxy : {
             '/api2' : {
-                target : 'http://localhost:3000',
+                // target : 'http://8.129.170.158:3000/',
+                target : 'http://localhost:3000/',
                 changeOrigin : true
             },
             '/api' : {

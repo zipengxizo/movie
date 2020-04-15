@@ -3,11 +3,16 @@ import Vuex from 'vuex'
 import city from './city'
 import user from './user'
 import token from './token';
+import permission from './permission';
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
 
+  },
+  getters:{
+    roles: state => state.user.roles,
+    permission_routes: state => state.permission.addRouters,
   },
   mutations: {
 
@@ -18,6 +23,7 @@ export default new Vuex.Store({
   modules : {
     city,
     user,
-    token
+    token,
+    permission
   }
 })

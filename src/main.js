@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import router from './router'
 import App from './App.vue'
 import store from './store';
+import router from './router'
+import './permisson';
 Vue.config.productionTip = false;
 
 import Loading from '@/components/Loading'
