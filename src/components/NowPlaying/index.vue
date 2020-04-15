@@ -35,28 +35,31 @@ export default {
       isLoading: true,
       movieList: [],
       pullDownMsg: "",
-      prevCityId : -1
+      prevCityId: -1
     };
   },
   activated() {
     var cityId = this.$store.state.city.cityId;
-    if(this.prevCityId == cityId) return;
+    if (this.prevCityId == cityId) return;
     this.isLoading = true;
-    this.$api.movie.movieOnList({cityId:cityId}).then(res => {
-      var msg = res.data.msg;
-      if (msg === "ok") {
-        this.movieList = res.data.data.movieList;
+    this.$api.movie
+      .movieOnList({ cityId: cityId })
+      .then(res => {
+        var msg = res.data.msg;
+        if (msg === "ok") {
+          this.movieList = res.data.data.movieList;
+          this.isLoading = false;
+          this.prevCityId = cityId;
+        }
+      })
+      .catch(err => {
+        console.log(err);
         this.isLoading = false;
-        this.prevCityId = cityId;
-      }
-    }).catch((err)=>{
-      console.log(err);
-      this.isLoading = false;
-    });
+      });
   },
-methods: {
+  methods: {
     handleToDetail(movieId) {
-      this.$router.push('/movie/detail/'+movieId);
+      this.$router.push("/movie/detail/" + movieId);
     },
     handleToScroll(pos) {
       if (pos.y > 30) {
@@ -66,20 +69,22 @@ methods: {
     handleToTouchEnd(pos) {
       if (pos.y > 30) {
         var cityId = this.$store.state.city.cityId;
-        this.$api.movie.movieOnList({cityId:cityId}).then(res => {
-          var msg = res.data.msg;
-          if (msg === "ok") {
-            this.pullDownMsg = "更新成功";
-            setTimeout(() => {
+        this.$api.movie
+          .movieOnList({ cityId: cityId })
+          .then(res => {
+            var msg = res.data.msg;
+            if (msg === "ok") {
+              this.pullDownMsg = "更新成功";
+              setTimeout(() => {
                 this.movieList = res.data.data.movieList;
                 this.pullDownMsg = "";
-            }, 1000);
-          }
-        }).catch((err)=>{
-          console.log(err);
-          this.isLoading = false;
-          this.pullDownMsg = '';
-        })
+              }, 1000);
+            }
+          })
+          .catch(() => {
+            this.isLoading = false;
+            this.pullDownMsg = "";
+          });
       }
     }
   }
