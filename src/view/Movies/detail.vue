@@ -8,12 +8,12 @@
       <div class="detail_list">
         <div
           class="detail_list_bg"
-          :style="{ 'background-image' : 'url('+ detailMovie.img.replace(/w\.h/,'148.208') +')' }"
+          :style="{ 'background-image' : 'url('+ backgroundImg +')' }"
         ></div>
         <div class="detail_list_filter"></div>
         <div class="detail_list_content">
           <div class="detail_list_img">
-            <img :src="detailMovie.img | replaceWh('148.208')" alt />
+            <img :src="backgroundImg" alt />
           </div>
           <div class="detail_list_info">
             <h2>{{ detailMovie.nm }}</h2>
@@ -64,11 +64,15 @@ export default {
     },
     srcAnddur(){
         return this.detailMovie.src && `${this.detailMovie.src} / ${this.detailMovie.dur} 分钟` 
+    },
+    backgroundImg(){
+      return this.detailMovie && this.detailMovie.img.replace(/w\.h/,'148.208')
     }
   },
   methods: {
     handleToBack() {
-      this.$router.back();
+      // this.$router.back();
+      this.$router.go(-1);
     }
   },
   mounted() {
@@ -89,6 +93,7 @@ export default {
         }
       })
       .catch(err => {
+        this.isLoading = false;
         console.log(err);
       });
   }

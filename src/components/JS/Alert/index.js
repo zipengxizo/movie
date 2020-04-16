@@ -16,12 +16,14 @@ export const messageBox = (function(){
     
         var MyComponent = Vue.extend(MessageBox);
 
-        for(var attr in opts){
+        Object.assign(defaults,opts);
+
+        /* for(var attr in opts){
             defaults[attr] = opts[attr];
-        }
+        } */
 
         var vm = new MyComponent({
-            el : document.createElement('div'),
+            // el : document.createElement('div'),
             data : {
                 title : defaults.title,
                 content : defaults.content,
@@ -38,7 +40,7 @@ export const messageBox = (function(){
                     document.body.removeChild( vm.$el );
                 }
             }
-        });
+        }).$mount();
 
         document.body.appendChild( vm.$el );
 

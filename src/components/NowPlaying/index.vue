@@ -53,13 +53,15 @@ export default {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err)
         this.isLoading = false;
       });
   },
   methods: {
     handleToDetail(movieId) {
-      this.$router.push("/movie/detail/" + movieId);
+      // this.$router.push("/movie/detail/" + movieId);
+      this.$router.push(`/movie/detail/${movieId}`);
+
     },
     handleToScroll(pos) {
       if (pos.y > 30) {

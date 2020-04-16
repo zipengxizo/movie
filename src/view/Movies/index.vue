@@ -42,8 +42,7 @@ export default {
         this.$api.location.location().then((res) => {
             var msg = res.data.msg;
             if(msg === 'ok'){
-                var nm = res.data.data.nm;
-                var id = res.data.data.id;
+                let {nm,id} = res.data.data;
                 if( this.$store.state.city.cityId == id ){return;}
                 messageBox({
                     title : '定位',
@@ -71,8 +70,8 @@ export default {
 .movie_menu .city_name{ margin-left: 20px; height:100%; line-height: 45px;}
 .movie_menu .city_name.active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
 .movie_menu .city_name.router-link-active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
-.movie_menu .hot_swtich{ display: flex; height:100%; line-height: 45px;}
-.movie_menu .hot_item{ font-size: 15px; color:#666; width:80px; text-align:center; margin:0 12px; font-weight:700;}
+.movie_menu .hot_swtich{ display: flex;flex: 1; height:100%; line-height: 45px;}
+.movie_menu .hot_item{flex: 1; font-size: 15px; color:#666; width:80px; text-align:center; margin:0 12px; font-weight:700;}
 .movie_menu .hot_item.active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
 .movie_menu .hot_item.router-link-active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
 .movie_menu .search_entry{ margin-right:20px; height:100%; line-height: 45px;}

@@ -39,6 +39,7 @@ const permission = {
         const {
           roles
         } = data;
+        //asyncRouterMap 以后根据role获取
         const accessedRouters = asyncRouterMap.filter(v => {
           if (roles.indexOf('admin') >= 0) return true;
           if (hasPermission(roles, v)) {

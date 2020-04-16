@@ -1,6 +1,6 @@
 <template>
-    <div style="padding:10px;">
-        <a href="/movie/usersadmin" target="_blank">进入管理后台</a>
+    <div style="padding:10px;height:100%;display:flex;">
+        <a style="display:block;margin:auto;" href="/movie/usersadmin" target="_blank">进入管理后台</a>
         <!-- <div>当前用户：{{ $store.state.user.name }} <a href="javascript:void(0);" @click="handleToLogout">退出</a></div>
         <div v-if="$store.state.user.isAdmin">用户身份：管理员 <a href="/movie/usersadmin" target="_blank">进入管理后台</a></div>
         <div v-else>用户身份：普通会员</div>
@@ -21,8 +21,8 @@ export default {
             this.$api.users.logout().then((res)=>{
                 var status = res.data.status;
                 if(status === 0){
-                    localStorage.removeItem('name');
-                    localStorage.removeItem('isAdmin');
+                    window.localStorage.removeItem('name');
+                    window.localStorage.removeItem('isAdmin');
                     this.$store.commit('user/USER_NAME',{ name : '' , isAdmin : false , userHead : '' });
                     this.$router.push('/mine/login');
                 }
@@ -38,7 +38,7 @@ export default {
                 }
             };
 
-            var This = this;
+            var self = this;
             this.$api.users.uploadUserHead(param , config).then((res)=>{
                 var status = res.data.status;
                 if( status === 0 ){
@@ -47,9 +47,9 @@ export default {
                         content : '上传头像成功',
                         ok : '确定',
                         handleOk(){
-                            This.$store.commit('user/USER_NAME',{ 
-                                name : This.$store.state.user.name , 
-                                isAdmin : This.$store.state.user.isAdmin ,
+                            self.$store.commit('user/USER_NAME',{ 
+                                name : self.$store.state.user.name , 
+                                isAdmin : self.$store.state.user.isAdmin ,
                                 userHead : res.data.data.userHead + '?' + Math.random()
                             });
                         }

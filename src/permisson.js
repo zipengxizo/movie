@@ -1,16 +1,11 @@
 import router from './router'
 import store from './store'
-
-
 const whiteList = ['/mine/login','/movie/nowPlaying','/movie/nowPlaying',
-'/movie/comingSoon','/movie/city','/movie/search','/movie/detail/:movieId','/cinema'
+'/movie/comingSoon','/movie/city','/movie/search','/movie/detail/','/cinema'
 ,'/mine/register','/mine/findPassword'];
 router.beforeEach(async(to, from, next) => {
 
-  // determine whether the user has logged in
-  const hasToken = window.localStorage.getItem('token');
-
-  if (hasToken) {
+  if (store.getters.token) {
     if (to.path === '/mine/login') {
       next({ path: '/mine/login' })
     } else {
@@ -22,12 +17,16 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          const { roles } = await store.dispatch('user/getInfo');
+
+          /* 用promise
+          const { roles } = await store.dispatch('user/getInfo'); */
+          // 用await, async
+          await store.dispatch('user/getInfo');
 
           // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes', {roles:roles});
+          await store.dispatch('permission/generateRoutes', {roles:store.getters.roles});
           // dynamically add accessible routes
-          router.addRoutes(accessRoutes);
+          router.addRoutes(store.getters.permission_routes);
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
@@ -40,7 +39,9 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-    if (whiteList.indexOf(to.path) !== -1) {
+    //处理带参数的路由
+    let filterTo = to.path.replace(/\d+/g,'');
+    if (whiteList.indexOf(filterTo) !== -1) {
       // in the free login whitelist, go directly
       next()
     } else {

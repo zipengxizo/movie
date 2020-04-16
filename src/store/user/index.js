@@ -8,8 +8,14 @@ const state = {
 };
 
 const actions = {
-    // get user info
-  getInfo({ commit, state }) {
+  //用async await;
+  async getInfo({commit,state}){
+    let result = await users.getUser(state.token);
+    let {roles} = result.data.data;
+    commit('SET_ROLES',roles);
+  },
+    //用promise get user info
+  /* getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       users.getUser(state.token).then(response => {
         const { data } = response.data;
@@ -29,7 +35,7 @@ const actions = {
         reject(error)
       })
     })
-  },
+  }, */
 
 };
 

@@ -5,10 +5,11 @@ import router from './router'
 import './permisson';
 Vue.config.productionTip = false;
 
-import Loading from '@/components/Loading'
+//异步加载组件
+const Loading = ()=> import('@/components/Loading');
 Vue.component('Loading',Loading);
 
-import Scroller from '@/components/Scroller'
+const Scroller = ()=> import('@/components/Scroller');
 Vue.component('Scroller',Scroller);
 
 import api from '@/api';

@@ -45,8 +45,7 @@ export default {
     watch:{
         message(newVal) {
             var that = this;
-            // var cityId = this.$store.state.city.id;
-            var cityId = 10;
+            var cityId = this.$store.state.city.id;
             this.cancelRequest();
             this.isLoading = true;
             axios.get('/api/searchList?cityId='+ cityId +'&kw='+newVal,{

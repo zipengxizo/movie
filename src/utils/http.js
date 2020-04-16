@@ -52,10 +52,6 @@ const errorHandle = (status, response) => {
         case 401:
             tip('登录过期，请重新登录');
             window.localStorage.removeItem('token');
-            // store.commit('loginSuccess', null);
-            // setTimeout(() => {
-            //     toLogin(response.data.fullPath);
-            // }, 1000);
             break;
         // 404请求不存在
         case 404:

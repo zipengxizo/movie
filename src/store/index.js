@@ -13,6 +13,7 @@ export default new Vuex.Store({
   getters:{
     roles: state => state.user.roles,
     permission_routes: state => state.permission.addRouters,
+    token : state => state.token.token
   },
   mutations: {
 
