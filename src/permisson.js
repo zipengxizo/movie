@@ -4,7 +4,6 @@ const whiteList = ['/mine/login','/movie/nowPlaying','/movie/nowPlaying',
 '/movie/comingSoon','/movie/city','/movie/search','/movie/detail/','/cinema'
 ,'/mine/register','/mine/findPassword'];
 router.beforeEach(async(to, from, next) => {
-
   if (store.getters.token) {
     if (to.path === '/mine/login') {
       next({ path: '/mine/login' })
@@ -17,7 +16,6 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-
           /* 用promise
           const { roles } = await store.dispatch('user/getInfo'); */
           // 用await, async
