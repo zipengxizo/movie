@@ -1,7 +1,7 @@
 <template>
   <div class="movie_body" ref="movie_body">
     <Loading v-if="isLoading" />
-    <Scroller v-else @handleToScroll="handleToScroll" @handleToTouchEnd="handleToTouchEnd">
+    <Scroller v-else v-on:handleToScroll="handleToScroll" v-on:handleToTouchEnd="handleToTouchEnd">
       <ul>
         <li class="pullDown">{{ pullDownMsg }}</li>
         <li v-for="item in movieList" :key="item.id">

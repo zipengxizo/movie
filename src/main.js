@@ -12,6 +12,8 @@ Vue.component('Loading',Loading);
 const Scroller = ()=> import('@/components/Scroller');
 Vue.component('Scroller',Scroller);
 
+// Vue.prototype.$eventBus = new Vue();
+
 import api from '@/api';
 Vue.prototype.$api = api;
 

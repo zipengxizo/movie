@@ -33,6 +33,7 @@ Vue.use(element);
 export default {
   name: "admin",
   computed:{
+    //把mapGetters映射到computed属性中
     ...mapGetters([
       'permission_routes',
     ]),

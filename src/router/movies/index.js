@@ -23,7 +23,7 @@ export default {
         {
             path : 'detail/:movieId',
             components : {
-                default : ()=> import('@/components/NowPlaying'),
+                // default : ()=> import('@/components/NowPlaying'),
                 detail : ()=> import('@/view/Movies/detail')
             },
             props : {

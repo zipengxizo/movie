@@ -13,7 +13,7 @@
         <div class="detail_list_filter"></div>
         <div class="detail_list_content">
           <div class="detail_list_img">
-            <img :src="backgroundImg" alt />
+            <img :src="detailMovie.img | replaceImgUrl" alt />
           </div>
           <div class="detail_list_info">
             <h2>{{ detailMovie.nm }}</h2>
@@ -56,6 +56,11 @@ export default {
     Header
   },
   props: ["movieId"],
+  filters:{
+    replaceImgUrl(value){
+      return value.replace(/w\.h/g,'140.127');
+    }
+  },
   computed: {
     filterPhotos: function() {
       return this.detailMovie.photos && this.detailMovie.photos.map((item)=>{
@@ -76,6 +81,7 @@ export default {
     }
   },
   mounted() {
+    // let movieId = this.$route.params.movieId;
     this.$api.movie
       .movieDetail({ movieId: this.movieId })
       .then(res => {
@@ -99,7 +105,6 @@ export default {
   }
 };
 </script>
-
 <style scoped>
 #detailContrainer {
   position: absolute;

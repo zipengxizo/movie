@@ -54,8 +54,7 @@ export default {
                 })
             }).then((res)=>{
                 this.isLoading = false;
-                var msg = res.data.msg;
-                var movies = res.data.data.movies;
+                let {msg,movies} = res.data.data;
                 if(msg && movies){
                     this.moviesList = res.data.data.movies.list;
                 }

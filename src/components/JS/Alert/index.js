@@ -5,7 +5,7 @@ export const messageBox = (function(){
 
     return function( opts ){  //配置参数
 
-        var defaults = {   //默认值
+        /* var defaults = {   //默认值
             title : '',
             content : '',
             cancel : '',
@@ -13,31 +13,38 @@ export const messageBox = (function(){
             handleCancel : null,
             handleOk : null
         };
-    
-        var MyComponent = Vue.extend(MessageBox);
-
-        Object.assign(defaults,opts);
+        Object.assign(defaults,opts); */
 
         /* for(var attr in opts){
             defaults[attr] = opts[attr];
         } */
+  
+        var mixin = {
+            data: function () {
+              return {   
+                title : 'title',
+                content : '',
+                cancel : '',
+                ok : '',
+                handleCancel : null,
+                handleOk : null
+              }
+            }
+          }
+          var MyComponent = Vue.extend(MessageBox);
 
         var vm = new MyComponent({
             // el : document.createElement('div'),
-            data : {
-                title : defaults.title,
-                content : defaults.content,
-                cancel : defaults.cancel,
-                ok : defaults.ok
-            },
+            mixins:[mixin],
+            data : opts,
             methods : {
-                handleCancel(){
-                    defaults.handleCancel && defaults.handleCancel.call(this);
-                    document.body.removeChild( vm.$el );
+                handleCancel1(){
+                    this.handleCancel && this.handleCancel.call(this);
+                    document.body.removeChild( this.$el );
                 },
-                handleOk(){
-                    defaults.handleOk && defaults.handleOk.call(this);
-                    document.body.removeChild( vm.$el );
+                handleOk1(){
+                    this.handleOk && this.handleOk.call(this);
+                    document.body.removeChild( this.$el );
                 }
             }
         }).$mount();
