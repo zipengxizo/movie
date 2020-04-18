@@ -49,7 +49,8 @@ export default {
   data() {
     return {
       detailMovie: {},
-      isLoading: true
+      isLoading: true,
+      swiperdemo:null
     };
   },
   components: {
@@ -80,6 +81,9 @@ export default {
       this.$router.go(-1);
     }
   },
+  destroyed(){
+    this.swiperdemo.destroy(false);
+  },
   mounted() {
     // let movieId = this.$route.params.movieId;
     this.$api.movie
@@ -90,7 +94,7 @@ export default {
           this.isLoading = false;
           this.detailMovie = res.data.data.detailMovie;
           this.$nextTick(() => {
-            new window.Swiper(this.$refs.detail_player, {
+            this.swiperdemo = new window.Swiper(this.$refs.detail_player, {
               slidesPerView: "auto",
               freeMode: true,
               freeModeSticky: true

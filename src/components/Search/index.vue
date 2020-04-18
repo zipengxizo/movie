@@ -45,7 +45,7 @@ export default {
     watch:{
         message(newVal) {
             var that = this;
-            var cityId = this.$store.state.city.id;
+            var cityId = this.$store.state.city.cityId;
             this.cancelRequest();
             this.isLoading = true;
             axios.get('/api/searchList?cityId='+ cityId +'&kw='+newVal,{
@@ -54,7 +54,8 @@ export default {
                 })
             }).then((res)=>{
                 this.isLoading = false;
-                let {msg,movies} = res.data.data;
+                let msg = res.data.msg;
+                let {movies} = res.data.data;
                 if(msg && movies){
                     this.moviesList = res.data.data.movies.list;
                 }

@@ -1,5 +1,8 @@
 <template>
   <div class="movie_body" ref="movie_body">
+    <section v-if="errored">
+    <p style="text-align:center;">对不起，无法获取信息，请稍后再试.</p>
+  </section>
     <Loading v-if="isLoading" />
     <Scroller v-else v-on:handleToScroll="handleToScroll" v-on:handleToTouchEnd="handleToTouchEnd">
       <ul>
@@ -35,7 +38,8 @@ export default {
       isLoading: true,
       movieList: [],
       pullDownMsg: "",
-      prevCityId: -1
+      prevCityId: -1,
+      errored:false
     };
   },
   activated() {
@@ -83,9 +87,13 @@ export default {
               }, 1000);
             }
           })
-          .catch(() => {
+          .catch((err) => {
+            console.log(err);
+            this.errored = true;
+          })
+          .finally(()=>{
+            this.pullDownMsg = '';
             this.isLoading = false;
-            this.pullDownMsg = "";
           });
       }
     }
