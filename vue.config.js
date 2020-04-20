@@ -2,6 +2,7 @@ const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 module.exports = {
     productionSourceMap : false,
+    runtimeCompiler:true,
     publicPath: '/movie',
     devServer : {
         proxy : {

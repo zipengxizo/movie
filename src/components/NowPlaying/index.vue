@@ -92,7 +92,6 @@ export default {
             this.errored = true;
           })
           .finally(()=>{
-            this.pullDownMsg = '';
             this.isLoading = false;
           });
       }

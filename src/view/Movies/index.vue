@@ -1,6 +1,6 @@
 <template>
       <div id="main">
-        <Header title="电影" />
+        <mytabbar title="电影" />
             <div id="content">
                 <div class="movie_menu">
 
@@ -20,22 +20,22 @@
                     <router-view />
                 </keep-alive>
             </div>
-        <TabBar />
+        <mytabbar />
         <router-view name="detail" />
     </div>
 </template>
 
 <script>
 
-import Header from '@/components/Header';
-import TabBar from '@/components/TabBar';
+// import Header from '@/components/Header';
+// import TabBar from '@/components/TabBar';
 import {messageBox} from '@/components/JS/Alert';
 
 export default {
   name:'movie',
   components:{
-    Header,
-    TabBar
+    // Header,
+    // TabBar
   },
   mounted() {
     setTimeout(()=>{

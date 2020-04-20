@@ -1,8 +1,8 @@
 <template>
   <div id="detailContrainer" class="slide-enter-active">
-    <Header title="影片详情">
+    <myheader title="影片详情">
       <i class="iconfont icon-right" @touchstart="handleToBack"></i>
-    </Header>
+    </myheader>
     <Loading v-if="isLoading" />
     <div v-else id="content" class="contentDetail">
       <div class="detail_list">
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 
 export default {
   name: "Detail",
@@ -54,7 +54,7 @@ export default {
     };
   },
   components: {
-    Header
+    // Header
   },
   props: ["movieId"],
   filters:{

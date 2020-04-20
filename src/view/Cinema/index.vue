@@ -1,6 +1,6 @@
 <template>
     <div id="main">
-        <Header title="影院" />
+        <myheader title="影院" />
         <div id="content">
             <div class="cinema_menu">
 				<div class="city_switch">
@@ -15,20 +15,20 @@
 			</div>
             <CinemaList />
         </div>
-        <TabBar />
+        <mytabbar />
     </div>
 </template>
 
 <script>
-import Header from '@/components/Header';
-import TabBar from '@/components/TabBar';
+// import Header from '@/components/Header';
+// import TabBar from '@/components/TabBar';
 import CinemaList from '@/components/CinemaList';
 
 export default {
     name : 'cinema',
     components : {
-        Header,
-        TabBar,
+        // Header,
+        // TabBar,
         CinemaList
     }
 }
