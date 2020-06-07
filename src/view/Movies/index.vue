@@ -1,6 +1,6 @@
 <template>
       <div id="main">
-        <mytabbar title="电影" />
+        <myheader title="电影" />
             <div id="content">
                 <div class="movie_menu">
 
